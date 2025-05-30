@@ -76,6 +76,7 @@ public class PluginClassLoader extends ClassLoader {
     }
 
     public final void reload() {
+        // TODO: use customized plugin directory
         File pluginDir = new File("plugins");
         File[] plugins = pluginDir.listFiles();
         List<URL> urls = new ArrayList<>();

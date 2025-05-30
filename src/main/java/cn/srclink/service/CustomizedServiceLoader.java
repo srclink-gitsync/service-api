@@ -12,8 +12,10 @@ import java.util.ServiceLoader;
 public final class CustomizedServiceLoader<S> implements Iterable<S>, Serializable {
     private final static List<ServiceProvider> providerList = new ArrayList<>();
     private final static Logger log = LoggerFactory.getLogger(CustomizedServiceLoader.class);
+    // TODO: move PluginClassLoader to provider
     private final static PluginClassLoader loader =
             new PluginClassLoader(Thread.currentThread().getContextClassLoader());
+    // TODO: use customized ServiceLoader(SPI)
     private final ServiceLoader<S> serviceLoader;
     private final Class<S> serviceClass;
     private List<S> cachedServices;
