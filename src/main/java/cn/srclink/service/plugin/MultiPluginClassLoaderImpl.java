@@ -9,6 +9,15 @@ import java.util.List;
 import java.util.Vector;
 import java.util.stream.Stream;
 
+/**
+ * MultiPluginClassLoaderImpl make multiple PluginClassLoaders as {@link PluginClassLoader}.</br>
+ * If there are multiple plug-in directories, use the following code:
+ * <blockquote><pre>
+ *     PluginClassLoader plugLoader1 = new JarPluginClassLoaderImpl("plugins");
+ *     PluginClassLoader plugLoader2 = new JarPluginClassLoaderImpl("extensions");
+ *     PluginClassLoader loader = new MultiPluginClassLoaderImpl(plugLoader1, plugLoader2)
+ * </pre></blockquote>
+ */
 public class MultiPluginClassLoaderImpl extends PluginClassLoader {
     private final List<PluginClassLoader> loaderList;
 
