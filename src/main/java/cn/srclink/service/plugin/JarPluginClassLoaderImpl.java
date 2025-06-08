@@ -1,4 +1,4 @@
-package cn.srclink.service;
+package cn.srclink.service.plugin;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,13 +15,15 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class PluginClassLoader extends ClassLoader {
-    private static final Logger log = LoggerFactory.getLogger(PluginClassLoader.class);
+public class JarPluginClassLoaderImpl extends PluginClassLoader {
+    private static final Logger log = LoggerFactory.getLogger(JarPluginClassLoaderImpl.class);
     private transient final ClassLoader parent;
+    private final File pluginDir;
     private transient ClassLoader delegate;
 
-    public PluginClassLoader(ClassLoader parent) {
+    public JarPluginClassLoaderImpl(ClassLoader parent, File pluginDir) {
         this.parent = parent;
+        this.pluginDir = pluginDir;
         reload();
     }
 
@@ -37,7 +39,7 @@ public class PluginClassLoader extends ClassLoader {
 
     @Override
     public String getName() {
-        return "cn.srclink.service.PluginClassLoader";
+        return "cn.srclink.service.plugin.JarPluginClassLoaderImpl";
     }
 
     @Override
@@ -75,9 +77,8 @@ public class PluginClassLoader extends ClassLoader {
         delegate.clearAssertionStatus();
     }
 
+    @Override
     public final void reload() {
-        // TODO: use customized plugin directory
-        File pluginDir = new File("plugins");
         File[] plugins = pluginDir.listFiles();
         List<URL> urls = new ArrayList<>();
         if (plugins != null) {
@@ -85,7 +86,7 @@ public class PluginClassLoader extends ClassLoader {
                 try {
                     urls.add(plugin.toURI().toURL());
                 } catch (MalformedURLException e) {
-                    log.error("Load plugin error: {}",e.getMessage());
+                    log.error("Load plugin error: {}", e.getMessage());
                 }
             });
         }
