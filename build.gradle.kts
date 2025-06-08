@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "cn.srclink"
-version = "0.0.1"
+version = "0.0.2"
 
 repositories {
     maven(url = "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/")
