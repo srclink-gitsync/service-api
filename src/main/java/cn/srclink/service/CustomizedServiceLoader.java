@@ -1,8 +1,11 @@
 package cn.srclink.service;
 
+import cn.srclink.service.plugin.JarPluginClassLoaderImpl;
+import cn.srclink.service.plugin.PluginClassLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,7 +17,7 @@ public final class CustomizedServiceLoader<S> implements Iterable<S>, Serializab
     private final static Logger log = LoggerFactory.getLogger(CustomizedServiceLoader.class);
     // TODO: move PluginClassLoader to provider
     private final static PluginClassLoader loader =
-            new PluginClassLoader(Thread.currentThread().getContextClassLoader());
+            new JarPluginClassLoaderImpl(Thread.currentThread().getContextClassLoader(), new File("plugins"));
     // TODO: use customized ServiceLoader(SPI)
     private final ServiceLoader<S> serviceLoader;
     private final Class<S> serviceClass;
