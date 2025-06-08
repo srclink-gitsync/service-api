@@ -21,6 +21,10 @@ public class JarPluginClassLoaderImpl extends PluginClassLoader {
     private final File pluginDir;
     private transient ClassLoader delegate;
 
+    public JarPluginClassLoaderImpl(File pluginDir) {
+        this(JarPluginClassLoaderImpl.class.getClassLoader(), pluginDir);
+    }
+
     public JarPluginClassLoaderImpl(ClassLoader parent, File pluginDir) {
         this.parent = parent;
         this.pluginDir = pluginDir;
