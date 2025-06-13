@@ -17,6 +17,9 @@ import java.util.stream.Stream;
  *     PluginClassLoader plugLoader2 = new JarPluginClassLoaderImpl("extensions");
  *     PluginClassLoader loader = new MultiPluginClassLoaderImpl(plugLoader1, plugLoader2)
  * </pre></blockquote>
+ *
+ * @author srclink
+ * @version 1.0.0
  */
 public class MultiPluginClassLoaderImpl extends PluginClassLoader {
     private final List<PluginClassLoader> loaderList;

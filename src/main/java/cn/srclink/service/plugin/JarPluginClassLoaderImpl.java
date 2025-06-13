@@ -15,6 +15,12 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * Support jar packaged plugins load from disk.
+ *
+ * @author srclink
+ * @version 1.0.0
+ */
 public class JarPluginClassLoaderImpl extends PluginClassLoader {
     private static final Logger log = LoggerFactory.getLogger(JarPluginClassLoaderImpl.class);
     private transient final ClassLoader parent;
@@ -83,9 +89,13 @@ public class JarPluginClassLoaderImpl extends PluginClassLoader {
 
     @Override
     public final void reload() {
+        // rebuild the file list in plugin dir
         File[] plugins = pluginDir.listFiles();
+        // build the external plugin class path
         List<URL> urls = new ArrayList<>();
+        // check if the file list exists
         if (plugins != null) {
+            // add all jar packaged plugins to classpath
             Arrays.stream(plugins).filter(plugin -> plugin.getName().endsWith(".jar")).forEach(plugin -> {
                 try {
                     urls.add(plugin.toURI().toURL());
@@ -94,6 +104,7 @@ public class JarPluginClassLoaderImpl extends PluginClassLoader {
                 }
             });
         }
+        // recreate class loader, classes will be auto unload after gc
         delegate = new URLClassLoader(urls.toArray(new URL[0]), this.parent);
     }
 }
