@@ -52,6 +52,12 @@ public class SystemInitializeEvent implements ApplicationListener<ApplicationSta
 
 ## 更新日志
 
+### 2025.06.13
+
+- 为 `JarPluginClassLoaderImpl` 添加无父类的构造函数
+- 为 `CustomizedServiceLoader` 添加获取和修改 `PluginClassLoader` 的方法
+- 为 `CustomizedServiceLoader` 添加移除 `ServiceProvider` 的方法
+
 ### 2025.06.08
 
 - 重构 `PluginClassLoader`，现在属于 `cn.srclink.service.plugin` 模块
