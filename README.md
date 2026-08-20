@@ -1,7 +1,29 @@
 # Service API模块
 
+![Maven Central Version](https://img.shields.io/maven-central/v/cn.srclink/service-api)
+
 Service API模块通过重定义 `ServiceLoader` 类，
 引入 `PluginClassLoader` 实现简单的外部JAR插件加载功能。
+
+## 引入依赖
+
+本项目已发布到 maven 中央仓库。包名：`cn.srclink:service-api`
+
+### Gradle 引入
+
+```kotlin
+implementation("cn.srclink:service-api:0.0.3")
+```
+
+### Maven 引入
+
+```xml
+<dependency>
+    <groupId>cn.srclink</groupId>
+    <artifactId>service-api</artifactId>
+    <version>0.0.3</version>
+</dependency>
+```
 
 ## 使用示例
 
